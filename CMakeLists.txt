@@ -4,8 +4,14 @@ project(SFMLProject)
 set(CMAKE_CXX_STANDARD 20)
 
 # Output directories for Debug and Release
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin/Debug)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin/Release)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin/)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin/)
+
+# Add static flags - Windows Only?
+if(WIN32)
+    set(CMAKE_CXX_FLAGS "-static-libgcc -static-libstdc++")
+    set(CMAKE_EXE_LINKER_FLAGS "-static")
+endif()
 
 # Disable shared libs so we link statically
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
@@ -90,14 +96,9 @@ endif()
 
 # Windows: Copy SFML DLLs
 if(WIN32)
-    add_custom_command(TARGET SFMLProject POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            ${SFML_BINARY_DIR}/bin/sfml-audio-2.dll
-            ${SFML_BINARY_DIR}/bin/sfml-graphics-2.dll
-            ${SFML_BINARY_DIR}/bin/sfml-window-2.dll
-            ${SFML_BINARY_DIR}/bin/sfml-system-2.dll
-            ${SFML_BINARY_DIR}/bin/sfml-network-2.dll
-            ${SFML_SOURCE_DIR}/extlibs/bin/$<IF:$<EQUAL:${CMAKE_SIZEOF_VOID_P},8>,x64,x86>/openal32.dll
-            $<TARGET_FILE_DIR:SFMLProject>
-    )
+    add_custom_command(
+            TARGET SFMLProject
+            COMMENT "Copy OpenAL DLL to build directory so app can have sound"
+            PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${SFML_SOURCE_DIR}/extlibs/bin/$<IF:$<EQUAL:${CMAKE_SIZEOF_VOID_P},8>,x64,x86>/openal32.dll $<TARGET_FILE_DIR:SFMLProject>
+            VERBATIM)
 endif()

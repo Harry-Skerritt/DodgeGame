@@ -9,11 +9,11 @@ int main()
   sf::RenderWindow window(sf::VideoMode(1080, 720), "SFML Project!");
   
   sf::Image icon = sf::Image();
-  if (!icon.loadFromFile("../Data/Images/icon/icon.png")) {
+  if (!icon.loadFromFile("../Data/Images/icon.png")) {
     std::cerr << "Error loading icon" << std::endl;
+  } else {
+    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
   }
-  
-  window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 
   //initialise an instance of the game class
