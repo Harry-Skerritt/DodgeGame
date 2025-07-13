@@ -29,8 +29,8 @@ bool GlowSprite::init(sf::Vector2f size, sf::Color glow_color, sf::Color core_co
     }
 
     m_shader.setUniform("iResolution", sf::Vector2f(m_rt.getSize()));
-    m_shader.setUniform("glowColor", sf::Glsl::Vec4(1.f, 0.5f, 0.0f, 1.0f));
-    m_shader.setUniform("coreColor", sf::Glsl::Vec4(1.f, 0.f, 0.f, 1.f));
+    m_shader.setUniform("glowColor", sf::Glsl::Vec4(glow_color.r, glow_color.g, glow_color.b, 1.0f));
+    m_shader.setUniform("coreColor", sf::Glsl::Vec4(core_color.r, core_color.g, core_color.b, 1.f));
     m_shader.setUniform("glowSize", m_glow_size);
 
     return true;
