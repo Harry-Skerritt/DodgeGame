@@ -3,6 +3,7 @@
 #define GAME_H
 
 #include <SFML/Graphics.hpp>
+#include "GameObjects/GlowSprite.h"
 
 class Game
 {
@@ -21,6 +22,8 @@ class Game
 
  private:
   sf::RenderWindow& window;
+
+ GlowSprite glow;
 
 };
 

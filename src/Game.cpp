@@ -13,20 +13,24 @@ Game::~Game()
 
 }
 
-bool Game::init()
-{
+bool Game::init() {
+  glow.init(
+    {50, 50},
+    sf::Color(100, 100, 0, 255),
+    sf::Color::White,
+    20.f);
 
   return true;
 }
 
 void Game::update(float dt)
 {
-
+  //shader.setUniform("u_time", shader_clock.getElapsedTime().asSeconds());
 }
 
 void Game::render()
 {
-
+  window.draw(glow);
 }
 
 

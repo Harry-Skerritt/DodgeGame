@@ -29,7 +29,7 @@ FetchContent_MakeAvailable(SFML)
 set(SOURCE_FILES
     src/main.cpp
     src/Game.cpp 
-    src/Game.h
+    src/Game.h src/GameObjects/GlowSprite.h src/GameObjects/GlowSprite.cpp
 )
 
 # Windows: add icon resource if available
