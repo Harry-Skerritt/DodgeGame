@@ -26,6 +26,7 @@ bool Game::init() {
 void Game::update(float dt)
 {
   //shader.setUniform("u_time", shader_clock.getElapsedTime().asSeconds());
+  glow.setPosition(glow.getPosition().x + 50.f * dt, glow.getPosition().y);
 }
 
 void Game::render()

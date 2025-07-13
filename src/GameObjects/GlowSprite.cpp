@@ -44,7 +44,7 @@ void GlowSprite::overrideShader(std::string shader_path)
 void GlowSprite::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     sf::Sprite glow_sprite(m_rt.getTexture());
-    glow_sprite.setPosition(200, 200);
+    glow_sprite.setPosition(getPosition().x, getPosition().y);
 
     states.shader = &m_shader;
     states.blendMode = sf::BlendAlpha;

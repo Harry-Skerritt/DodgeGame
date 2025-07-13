@@ -15,10 +15,7 @@ class GlowSprite : public sf::Drawable, public sf::Transformable {
     ~GlowSprite();
 
     bool init(sf::Vector2f size, sf::Color glow_color, sf::Color core_color, float glow_size);
-
     void overrideShader(std::string shader_path);
-
-    void update(float dt);
 
   protected:
      virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
